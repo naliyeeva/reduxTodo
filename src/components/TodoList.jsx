@@ -10,7 +10,12 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodo, selectTodos, updateTodo } from "./slices/todosSlice";
+import {
+  deleteTodo,
+  markCompleted,
+  selectTodos,
+  updateTodo,
+} from "./slices/todosSlice";
 
 export const TodoList = () => {
   const todos = useSelector(selectTodos);
@@ -24,15 +29,27 @@ export const TodoList = () => {
     dispatch(deleteTodo({ id: todoId }));
   };
 
+  const handleCompleted = (todoId, isCompleted) => {
+    dispatch(markCompleted({ id: todoId, completed: !isCompleted }));
+  };
+
   return (
     <List>
       {todos &&
         todos.map((todo) => (
           <ListItemButton key={todo.id}>
             <ListItemIcon>
-              <Checkbox />
+              <Checkbox
+                checked={todo.completed}
+                onChange={() => handleCompleted(todo.id, todo.completed)}
+              />
             </ListItemIcon>
-            <ListItemText primary={todo.text} />
+            <ListItemText
+              primary={todo.text}
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+              }}
+            />
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
