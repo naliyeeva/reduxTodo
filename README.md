@@ -11,6 +11,8 @@
 
 4. Delete Task: Allow users to remove tasks from the list.
 
-5. Filter Tasks: Implement filters to show all tasks, only completed tasks, or only incomplete tasks.
+5. Completed: Allow users to mark tasks as completed.
+
+6. Filter Tasks: Implement filters to show all tasks, only completed tasks, or only incomplete tasks.
 
 Bonus: If you want to go a step further, you can consider adding features like task categories, due dates, or the ability to drag and reorder tasks.
