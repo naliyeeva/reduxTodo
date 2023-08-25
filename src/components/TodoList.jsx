@@ -17,7 +17,7 @@ import {
   updateTodo,
 } from "./slices/todosSlice";
 
-export const TodoList = () => {
+export const TodoList = ({ option }) => {
   const todos = useSelector(selectTodos);
   const dispatch = useDispatch();
 
@@ -33,10 +33,19 @@ export const TodoList = () => {
     dispatch(markCompleted({ id: todoId, completed: !isCompleted }));
   };
 
+  const filteredTodos = todos.filter((todo) => {
+    if (option === "complete") {
+      return todo.completed;
+    } else if (option === "incomplete") {
+      return !todo.completed;
+    }
+    return true; // for 'all' option
+  });
+
   return (
     <List>
       {todos &&
-        todos.map((todo) => (
+        filteredTodos.map((todo) => (
           <ListItemButton key={todo.id}>
             <ListItemIcon>
               <Checkbox
